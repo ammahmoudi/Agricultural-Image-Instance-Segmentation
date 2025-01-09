@@ -8,8 +8,8 @@ from dataset import PennFudanDataset, get_transform, collate_fn
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 # Set up dataset and data loader
-dataset = PennFudanDataset('train/', get_transform(train=True))
-dataset_test = PennFudanDataset('val/', get_transform(train=False))
+dataset = PennFudanDataset('PhenoBench/train/', get_transform(train=True))
+dataset_test = PennFudanDataset('PhenoBench/val/', get_transform(train=False))
 
 # Use a subset of the dataset for faster iterations
 indices = torch.randperm(len(dataset)).tolist()
@@ -59,9 +59,9 @@ for epoch in range(num_epochs):
 print("That's it!")
 
 # Save the trained model
-torch.save(model.state_dict(), 'model.pth')
+torch.save(model.state_dict(), 'model_2.pth')
 
 # Load the model for inference
-model.load_state_dict(torch.load('model.pth'))
-model.eval()
-model = model.to(device)
+# model.load_state_dict(torch.load('model.pth'))
+# model.eval()
+# model = model.to(device)

@@ -1,2 +1,4 @@
 venv
-__py_cache__
+__pycache__
+checkpoints
+datasets
