@@ -133,6 +133,26 @@ class PennFudanDataset(Dataset):
         """
         return len(self.imgs)
 
+class PennFudanTestDataset(Dataset):
+    """
+    Dataset for testing without masks or other annotations.
+    Loads only images from the specified directory.
+    """
+    def __init__(self, root, transforms=None):
+        self.root = root
+        self.transforms = transforms
+        self.imgs = list(sorted(os.listdir(os.path.join(root, "images"))))
+
+    def __getitem__(self, idx):
+        img_path = os.path.join(self.root, "images", self.imgs[idx])
+        img = read_image(img_path)
+        if self.transforms:
+            img = self.transforms(img)
+        return img, {}
+
+    def __len__(self):
+        return len(self.imgs)
+
 
 def get_transform(train):
     """
